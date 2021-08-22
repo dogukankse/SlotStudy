@@ -6,6 +6,8 @@ using Utils;
 
 public class SlotItemTable
 {
+	public Dictionary<SlotMatch, int[]> SegmentEndIndexes => _segmentEndIndexes;
+
 	private readonly SlotMatch[,] _table;
 	private readonly float[] _totalCounts;
 	private readonly SlotMatch[] _items;

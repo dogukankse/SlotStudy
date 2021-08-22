@@ -5,6 +5,9 @@ using Utils;
 
 public class SlotMatchFiller
 {
+	public Dictionary<SlotMatch, int[]> SegmentEndIndexes => _slotItemTable.SegmentEndIndexes;
+
+	
 	private readonly SlotItemTable _slotItemTable;
 	private readonly SlotMatch[] _rndArr;
 
