@@ -19,6 +19,7 @@ namespace Controllers
 		public SlotController(SlotView view, SlotPosition slotPosition)
 		{
 			YellManager.Instance.Listen(YellType.OnFirstTwoSame, new YellAction(this, OnFirstTwoSame));
+			YellManager.Instance.Listen(YellType.OnLastSlotAnimComplete, new YellAction(this, OnLastAnimCompleted));
 
 			_model = ScriptableObject.CreateInstance<SlotModel>();
 			_model.SlotPosition = slotPosition;
@@ -61,12 +62,16 @@ namespace Controllers
 
 
 			_view.StopSpine();
-			_model.IsFirstTwoSame = false;
 		}
 
 		private void OnFirstTwoSame(YellData yellData)
 		{
 			_model.IsFirstTwoSame = true;
+		}
+
+		private void OnLastAnimCompleted(YellData yellData)
+		{
+			_model.IsFirstTwoSame = false;
 		}
 	}
 }
