@@ -130,7 +130,7 @@ namespace Views
 		{
 			return _tileParent.DOLocalMoveY(-2.55f * 2, 1f)
 				.SetDelay(delay)
-				.SetEase(Ease.OutBounce);
+				.SetEase(Ease.OutBack);
 		}
 
 
@@ -138,7 +138,7 @@ namespace Views
 		{
 			return _tileParent.DOLocalMoveY(-2.55f * 2, 2.25f)
 				.SetDelay(delay)
-				.SetEase(Ease.OutBounce)
+				.SetEase(Ease.OutBack)
 				.OnComplete(() => { YellManager.Instance.Yell(YellType.OnLastSlotAnimComplete); });
 		}
 
