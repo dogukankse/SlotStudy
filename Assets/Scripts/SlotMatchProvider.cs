@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Utils;
+using Yell;
 
 public class SlotMatchProvider
 {
@@ -20,9 +21,18 @@ public class SlotMatchProvider
 
 	public SlotMatch GetMatch(bool updateIndex = true)
 	{
+		
+
 		SlotMatch item = _matchList[_currentIndex];
 		if (updateIndex)
+		{
 			_currentIndex++;
+			if (_currentIndex == _matchList.Count)
+			{
+				YellManager.Instance.Yell(YellType.MaxIndexReached);
+			}
+		}
+
 		return item;
 	}
 

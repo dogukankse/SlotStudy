@@ -53,7 +53,8 @@ namespace Utils
 		OnSlotMachineCreated,
 		PlayCoinParticle,
 		OnFirstTwoSame,
-		OnLastSlotAnimComplete
+		OnLastSlotAnimComplete,
+		MaxIndexReached
 	}
 
 

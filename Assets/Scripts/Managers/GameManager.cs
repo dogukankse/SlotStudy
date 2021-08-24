@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Net.NetworkInformation;
 using Components;
 using Controllers;
 using ScriptableObjects;
@@ -25,10 +26,12 @@ namespace Managers
 
 		private void Awake()
 		{
-			LoadOrCreateData();
-			_button.ButtonClicked += OnSpinButtonClicked;
 			YellManager.Instance.Listen(YellType.OnSlotMachineCreated, new YellAction(this, OnSlotMachineCreated));
 			YellManager.Instance.Listen(YellType.PlayCoinParticle, new YellAction(this, OnPlayParticle));
+			YellManager.Instance.Listen(YellType.MaxIndexReached, new YellAction(this, CreateNewMatches));
+
+			LoadOrCreateData();
+			_button.ButtonClicked += OnSpinButtonClicked;
 		}
 
 
@@ -50,14 +53,19 @@ namespace Managers
 			}
 			else
 			{
-				print("Creating");
-				SlotMatchFiller matchFiller = new SlotMatchFiller(100, _possibilityTable);
-				var slotMatches = matchFiller.Fill();
-				SlotMatchProvider.Init(slotMatches.ToList(), 0);
+				CreateNewMatches();
 			}
 
 			_matchProvider = SlotMatchProvider.Instance;
 			print(_matchProvider.GetMatch(false) + " " + _matchProvider.GetCurrentIndex());
+		}
+
+		private void CreateNewMatches(YellData yellData = null)
+		{
+			print("Creating");
+			SlotMatchFiller matchFiller = new SlotMatchFiller(100, _possibilityTable);
+			var slotMatches = matchFiller.Fill();
+			SlotMatchProvider.Init(slotMatches.ToList(), 0);
 		}
 
 		private void OnSlotMachineCreated(YellData yellData)
