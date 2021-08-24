@@ -42,10 +42,14 @@ namespace Controllers
 			_model.TileDataContainer = data;
 		}
 
+		/// <summary>
+		/// Stops the spine action and finds top and bottom by given tile
+		/// </summary>
+		/// <param name="matchItem">Centre tile</param>
 		public void StopSpine(TileType matchItem)
 		{
 			int maxIndex = DataCount - 1;
-
+			
 			int index = _model.TileDataContainer.GetIndexByTile(matchItem);
 
 			int topIndex = index - 1;

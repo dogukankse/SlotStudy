@@ -37,6 +37,7 @@ namespace Managers
 
 		private void OnDestroy()
 		{
+			//save current match list state to machine
 			SaveManager.Instance.Save(_matchProvider.GetSaveData(), _matchProvider.GetCurrentIndex());
 			print("Saved");
 		}
@@ -46,6 +47,7 @@ namespace Managers
 
 		private void LoadOrCreateData()
 		{
+			//if there is a save file load it, otherwise create new data 
 			if (SaveManager.Instance.Load(out SaveData data))
 			{
 				print("Loading");
@@ -73,6 +75,7 @@ namespace Managers
 			_slotMachineController = (SlotMachineController) yellData.data;
 		}
 
+		//play particle anim if all slots are same
 		private void OnPlayParticle(YellData yellData)
 		{
 			SlotMatch match = (SlotMatch) yellData.data;

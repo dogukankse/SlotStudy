@@ -42,6 +42,9 @@ namespace Controllers
 			_view.StartSpine();
 		}
 
+		/// <summary>
+		/// Gets next match from local save from provider and 
+		/// </summary>
 		public void StopSpine()
 		{
 			_model.SlotMachineState = SlotMachineState.Stopped;
@@ -49,6 +52,7 @@ namespace Controllers
 			Debug.Log(_slotMatch + " " + SlotMatchProvider.Instance.GetCurrentIndex());
 			List<TileType> matchItems = SlotMatchParser.Parse(_slotMatch).ToList();
 
+			//if first element is same, trigger an action for last slot animation
 			if (matchItems[0] == matchItems[1])
 				YellManager.Instance.Yell(YellType.OnFirstTwoSame);
 
