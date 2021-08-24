@@ -29,8 +29,6 @@ namespace Controllers
 			YellManager.Instance.Listen(YellType.OnSlotCreated, new YellAction(this, OnSlotCreated));
 			YellManager.Instance.Listen(YellType.OnLastSlotAnimComplete, new YellAction(this, OnLastSlotAnimCompleted));
 
-			YellManager.Instance.Yell(YellType.OnSlotMachineCreated, new YellData(this));
-
 			_model = ScriptableObject.CreateInstance<SlotMachineModel>();
 			_view = view;
 
@@ -48,7 +46,7 @@ namespace Controllers
 		{
 			_model.SlotMachineState = SlotMachineState.Stopped;
 			_slotMatch = SlotMatchProvider.Instance.GetMatch();
-			Debug.Log(_slotMatch);
+			Debug.Log(_slotMatch + " " + SlotMatchProvider.Instance.GetCurrentIndex());
 			List<TileType> matchItems = SlotMatchParser.Parse(_slotMatch).ToList();
 
 			if (matchItems[0] == matchItems[1])

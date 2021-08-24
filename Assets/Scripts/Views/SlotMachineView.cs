@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Common;
 using Controllers;
@@ -7,6 +8,7 @@ using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
 using Utils;
+using Yell;
 using Random = UnityEngine.Random;
 
 namespace Views
@@ -22,6 +24,12 @@ namespace Views
 		private void Awake()
 		{
 			_controller = new SlotMachineController(this);
+		}
+
+		private void Start()
+		{
+			YellManager.Instance.Yell(YellType.OnSlotMachineCreated, new YellData(_controller));
+
 		}
 
 		#endregion
